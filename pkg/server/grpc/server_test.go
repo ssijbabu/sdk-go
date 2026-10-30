@@ -95,7 +95,7 @@ func TestAuthzUnaryInterceptor(t *testing.T) {
 				return nil, nil
 			}
 
-			_, err := newAuthzUnaryInterceptor(tc.authorizers...)(requestCtx, nil, &grpc.UnaryServerInfo{FullMethod: "/test/Method"}, handler)
+			_, err := newAuthzUnaryInterceptor(nil, tc.authorizers...)(requestCtx, nil, &grpc.UnaryServerInfo{FullMethod: "/test/Method"}, handler)
 			if got := status.Code(err); got != tc.wantCode {
 				t.Fatalf("expected code %v, got %v (err=%v)", tc.wantCode, got, err)
 			}
